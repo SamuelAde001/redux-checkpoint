@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Task } from "./Task";
+import { filterTask } from "../features/task/taskSlice";
 
 export const ListTask = () => {
+  const dispatch = useDispatch();
+
   // destructor all my global tasks state
-  const { allTasks, pendingTasks, doneTasks, display } = useSelector(
-    (state) => state.task
-  );
+  const { allTasks, pendingTasks, doneTasks, display, triggerDisplay } =
+    useSelector((state) => state.task);
 
   // set the present task to display based on the status of display in the global state
   const [tasksToDisplay, setTasksToDisplay] = useState([]);
 
   //Hook o check render the conent based on which of the button was cliccked, whther pending or done
   useEffect(() => {
+    dispatch(filterTask());
     if (display === "all") {
       setTasksToDisplay(allTasks);
     } else if (display === "pending") {

@@ -18,6 +18,8 @@ const initialState = {
     editingDescription: "",
     editingID: "",
   },
+
+  triggerDisplay: true,
 };
 
 // JSON.parse(localStorage.getItem("tasks")) || [];
@@ -45,6 +47,21 @@ const taskSlice = createSlice({
         }
         return item;
       });
+      state.pendingTasks.tasks = state.pendingTasks.tasks.map((item) => {
+        if (item.id === action.payload) {
+          item.isDone = !item.isDone;
+        }
+        return item;
+      });
+      state.doneTasks.tasks = state.doneTasks.tasks.map((item) => {
+        if (item.id === action.payload) {
+          item.isDone = !item.isDone;
+        }
+        return item;
+      });
+
+      // to trigger disolay to rerender useefect
+      state.triggerDisplay = !state.triggerDisplay;
 
       //  save updated tasks status to local storage
       localStorage.setItem("tasks", JSON.stringify(state.allTasks));
