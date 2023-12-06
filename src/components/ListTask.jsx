@@ -15,7 +15,6 @@ export const ListTask = () => {
 
   //Hook o check render the conent based on which of the button was cliccked, whther pending or done
   useEffect(() => {
-    dispatch(filterTask());
     if (display === "all") {
       setTasksToDisplay(allTasks);
     } else if (display === "pending") {
@@ -26,7 +25,7 @@ export const ListTask = () => {
   }, [display, allTasks]);
 
   return (
-    <div>
+    <div className="max-h-[300px] scrollbar-thin scrollbar-thumb-[#00b96b] scrollbar-track-[#d9ffb6]  scroll-smooth overflow-scroll overflow-x-hidden">
       {/* mapping through task from the main state  */}
       {tasksToDisplay.map((item) => {
         return <Task key={item?.id} {...item} />;

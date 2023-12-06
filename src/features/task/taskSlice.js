@@ -93,6 +93,16 @@ const taskSlice = createSlice({
           state.editing.editingID = item.id;
           item.highlighted = true;
         }
+        state.pendingTasks.tasks.map((item) => {
+          if (item.id === id) {
+            item.highlighted = true;
+          }
+        });
+        state.doneTasks.tasks.map((item) => {
+          if (item.id === id) {
+            item.highlighted = true;
+          }
+        });
         localStorage.setItem("tasks", JSON.stringify(state.allTasks));
       });
     },
@@ -100,6 +110,20 @@ const taskSlice = createSlice({
     // state to sumbit edited task
     handlingEdit: (state, action) => {
       state.allTasks.map((item) => {
+        if (item.id === state.editing.editingID) {
+          item.description = action.payload;
+          item.highlighted = false;
+        }
+      });
+
+      state.pendingTasks.tasks.map((item) => {
+        if (item.id === state.editing.editingID) {
+          item.description = action.payload;
+          item.highlighted = false;
+        }
+      });
+
+      state.doneTasks.tasks.map((item) => {
         if (item.id === state.editing.editingID) {
           item.description = action.payload;
           item.highlighted = false;

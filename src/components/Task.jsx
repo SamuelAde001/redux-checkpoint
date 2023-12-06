@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   deleteTask,
   ediingTasksState,
+  filterTask,
   updateTaskStatus,
 } from "../features/task/taskSlice";
 import { Button, Checkbox } from "antd";
@@ -15,6 +16,7 @@ export const Task = ({ description, isDone, id, highlighted }) => {
   const dispatch = useDispatch();
   const handleChecked = () => {
     dispatch(updateTaskStatus(id));
+    dispatch(filterTask());
   };
 
   // edit function
