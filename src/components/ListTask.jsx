@@ -25,7 +25,7 @@ export const ListTask = () => {
   }, [display, allTasks]);
 
   return (
-    <div className="max-h-[300px] scrollbar-thin scrollbar-thumb-[#00b96b] scrollbar-track-[#d9ffb6]  scroll-smooth overflow-scroll overflow-x-hidden">
+    <div className="max-h-[300px] scrollbar-thin scrollbar-thumb-[#00b96b]  scroll-smooth overflow-scroll overflow-x-hidden">
       {/* mapping through task from the main state  */}
       {tasksToDisplay.map((item) => {
         return <Task key={item?.id} {...item} />;
